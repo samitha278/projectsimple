@@ -23,15 +23,9 @@ int main(){
         return 1;
     }
     
-    while((fgetc(myfile))!=EOF){   
-        //read file
-        char ch[100];
-        int read_line = fscanf(myfile,"%[^\n]", ch);
-        //check read_line
-        if(read_line==EOF){
-            printf("error occured while reading file");
-            return 1;
-        }
+    char ch[100];
+    //read file line by line 
+    while((fgetc(ch, sizeof(ch),myfile))!=EOF){ 
 
         //create node for ch in heap
         node* n = malloc(sizeof(node));
