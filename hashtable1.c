@@ -13,6 +13,7 @@ typedef struct node{
 node* hashtable[26];
 
 int main(){
+    
     //open file
     FILE* myfile;
     myfile = fopen("//path", "r");
@@ -50,9 +51,17 @@ int main(){
     //get hash code
     int key = hash_function(ch);
     
-    //linking node to hashtable
-    hashtable[key]=n;
+    //assign NULL to hashtable elements
+    for(int j=0;j<26;j++){
+        hashtable[j]=NULL;
+    }
     
+    //linking node to hashtable
+    if(hashtable[key]==NULL){
+        hashtable[key]=n;
+    }else
+        n->next=hashtable[key];
+        hashtable[key]=n;
     return 0;
 }
 //create hash function
