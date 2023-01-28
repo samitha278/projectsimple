@@ -2,7 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-int hash_function(char string[]); //hash function declartion
+//hash function declartion
+int hash_function(char string[]); 
 
 //create node structure
 typedef struct node{
@@ -31,6 +32,8 @@ int main(){
     char ch[100];
     //read file line by line 
     while(fgets(ch, 100, myfile)){ 
+      //remove new line character
+      ch[strcspn(ch,"\n")]=0;
       //create node for ch in heap
       node* n = malloc(sizeof(node));
       //ckeck malloc avalability
@@ -44,15 +47,13 @@ int main(){
       //get hash code
       int key = hash_function(ch);
 
-      //clear ch
-      ch[0]='\0';
       //linking node to hashtable
       if(hashtable[key]==NULL){
           hashtable[key]=n;
       }else{
           n->next=hashtable[key];
           hashtable[key]=n;
-      }
+      }   
     }
     //close file
     fclose(myfile);
@@ -63,15 +64,16 @@ int main(){
     scanf("%s", inname);
     int inkey = hash_function(inname);
 
+    //searching user input through linked list
     node* tmp=hashtable[inkey];
-    while((tmp->next)!=NULL){
-      if(strcmp(tmp->name,inname)==0){
-        printf("found");
+    while(tmp!=NULL){
+      if(strcmp(tmp->name,inname)==0){ 
+        printf("found\n");
         return 0;
         }
       tmp=tmp->next;
     }
-    printf("not found");
+    printf("not found\n");
     return 1; 
 }
 
