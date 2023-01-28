@@ -44,6 +44,8 @@ int main(){
       //get hash code
       int key = hash_function(ch);
 
+      //clear ch
+      ch[0]='\0';
       //linking node to hashtable
       if(hashtable[key]==NULL){
           hashtable[key]=n;
@@ -61,11 +63,13 @@ int main(){
     scanf("%s", inname);
     int inkey = hash_function(inname);
 
-    for(node* tmp=hashtable[inkey];(tmp->next)!=NULL;tmp=tmp->next){
+    node* tmp=hashtable[inkey];
+    while((tmp->next)!=NULL){
       if(strcmp(tmp->name,inname)==0){
         printf("found");
         return 0;
-      }
+        }
+      tmp=tmp->next;
     }
     printf("not found");
     return 1; 
