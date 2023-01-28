@@ -31,34 +31,46 @@ int main(){
     char ch[100];
     //read file line by line 
     while(fgets(ch, 100, myfile)){ 
+      //create node for ch in heap
+      node* n = malloc(sizeof(node));
+      //ckeck malloc avalability
+      if(n==NULL){
+          printf("error occured creating node");
+          return 1;
+      }
+      strcpy(n->name, ch);  //assign string to node->name
+      n->next=NULL;  //assign NULL to next node's address
 
-        //create node for ch in heap
-        node* n = malloc(sizeof(node));
-        //ckeck malloc avalability
-        if(n==NULL){
-            printf("error occured creating node");
-            return 1;
-        }
-        strcpy(n->name, ch);  //assign string to node->name
-        n->next=NULL;  //assign NULL to next node's address
+      //get hash code
+      int key = hash_function(ch);
 
-        //get hash code
-        int key = hash_function(ch);
-
-        //linking node to hashtable
-        if(hashtable[key]==NULL){
-            hashtable[key]=n;
-        }else{
-            n->next=hashtable[key];
-            hashtable[key]=n;
-        }
+      //linking node to hashtable
+      if(hashtable[key]==NULL){
+          hashtable[key]=n;
+      }else{
+          n->next=hashtable[key];
+          hashtable[key]=n;
+      }
     }
-    
     //close file
     fclose(myfile);
-    
-    return 0;
+  
+    //get user input
+    char inname[100];
+    printf("Enter name: ");
+    scanf("%s", inname);
+    int inkey = hash_function(inname);
+
+    for(node* tmp=hashtable[inkey];(tmp->next)!=NULL;tmp=tmp->next){
+      if(strcmp(tmp->name,inname)==0){
+        printf("found");
+        return 0;
+      }
+    }
+    printf("not found");
+    return 1; 
 }
+
 //create hash function
 int hash_function(char string[]){
     int sum = 0;
