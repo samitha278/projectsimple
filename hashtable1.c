@@ -14,10 +14,14 @@ typedef struct node{
 node* hashtable[26];
 
 int main(){
+    //assign NULL to hashtable elements
+        for(int j=0;j<26;j++){
+            hashtable[j]=NULL;
+        }
     
     //open file
     FILE* myfile;
-    myfile = fopen("name.csv", "rb");
+    myfile = fopen("name.csv", "r");
     //check file's avalability
     if(myfile==NULL){
         printf("error occured while opening file");
@@ -26,7 +30,7 @@ int main(){
     
     char ch[100];
     //read file line by line 
-    while((fread(ch, sizeof(ch), 100 ,myfile))!=EOF){ 
+    while((fgets(ch, 100, myfile))!=EOF){ 
 
         //create node for ch in heap
         node* n = malloc(sizeof(node));
@@ -41,11 +45,6 @@ int main(){
         //get hash code
         int key = hash_function(ch);
 
-        //assign NULL to hashtable elements
-        for(int j=0;j<26;j++){
-            hashtable[j]=NULL;
-        }
-
         //linking node to hashtable
         if(hashtable[key]==NULL){
             hashtable[key]=n;
@@ -58,7 +57,7 @@ int main(){
     //close file
     int ele = fclose(myfile);
     //ckeck ele
-    if(ele<=0){
+    if(ele==NULL){
         printf("error occured while reading file");
         return 1;
     }
