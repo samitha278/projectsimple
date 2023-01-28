@@ -79,6 +79,18 @@ int main(){
     }
     printf("not found\n");
     return 1; 
+
+    //free up memory
+    for(int k=0;k<26;k++){
+        node* temp=hashtable[k];
+        hashtable[k]=NULL;
+        while(temp!=NULL){
+              node* next1 = temp->next;
+              free(temp);
+              temp=next1;
+        }
+    }
+    return 0;
 }
 
 //create hash function
