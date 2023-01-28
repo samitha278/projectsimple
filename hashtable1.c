@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int hash_function(char string[]); //hash function declartion
 
@@ -16,7 +17,7 @@ int main(){
     
     //open file
     FILE* myfile;
-    myfile = fopen("//path", "rb");
+    myfile = fopen("name.csv", "rb");
     //check file's avalability
     if(myfile==NULL){
         printf("error occured while opening file");
@@ -25,7 +26,7 @@ int main(){
     
     char ch[100];
     //read file line by line 
-    while((fgetc(ch, sizeof(ch),myfile))!=EOF){ 
+    while((fread(ch, sizeof(ch), 100 ,myfile))!=EOF){ 
 
         //create node for ch in heap
         node* n = malloc(sizeof(node));
@@ -34,7 +35,7 @@ int main(){
             printf("error occured creating node");
             return 1;
         }
-        n->name=ch;    //assign string to node->name
+        strcpy(n->name, ch);  //assign string to node->name
         n->next=NULL;  //assign NULL to next node's address
 
         //get hash code
