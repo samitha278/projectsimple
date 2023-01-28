@@ -55,12 +55,7 @@ int main(){
     }
     
     //close file
-    int ele = fclose(myfile);
-    //ckeck ele
-    if(ele==NULL){
-        printf("error occured while reading file");
-        return 1;
-    }
+    fclose(myfile);
     
     return 0;
 }
