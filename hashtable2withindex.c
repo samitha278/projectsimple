@@ -72,7 +72,7 @@ int main(){
     node* tmp=hashtable[inkey];
     while(tmp!=NULL){
       if(strcmp(tmp->name,inname)==0){ 
-        printf("found\n");
+        printf("found, index: %d\n", tmp->index);
         return 0;
         }
       tmp=tmp->next;
