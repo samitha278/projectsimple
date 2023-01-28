@@ -15,9 +15,9 @@ node* hashtable[26];
 
 int main(){
     //assign NULL to hashtable elements
-        for(int j=0;j<26;j++){
-            hashtable[j]=NULL;
-        }
+    for(int j=0;j<26;j++){        
+        hashtable[j]=NULL;
+    }
     
     //open file
     FILE* myfile;
@@ -30,7 +30,7 @@ int main(){
     
     char ch[100];
     //read file line by line 
-    while((fgets(ch, 100, myfile))!=EOF){ 
+    while(fgets(ch, 100, myfile)){ 
 
         //create node for ch in heap
         node* n = malloc(sizeof(node));
