@@ -1,6 +1,7 @@
 /*create linked list*/
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #define MAX_SIZE 100
 
 //creating node sturcture 
@@ -22,17 +23,21 @@ void printReverse();        //reverse print declartion
 int freelist();             //freelist function declartion     
 
 int main(){
+    clock_t start,end;
+    start=clock();
     insertNewNode(2);
     insertNewNode(4);
     insertNewNode(6);
     insertNewNode(8);
     
-    printf("list: "); print();
-    printf("reverse list: "); printReverse();
+    printf("list: \n"); print();
+    printf("reverse list: \n"); printReverse();
     
     if(head!=NULL)
         freelist();
-    
+    end=clock();
+    double total_time = ((double) (end - start)) / CLOCKS_PER_SEC;
+    printf("%f",total_time);
     return 0;
 }
 
