@@ -30,18 +30,26 @@ int main(){
     printf("list: "); print();
     printf("reverse list: "); printReverse();
     
-    freelist();
+    if(head!=NULL)
+        freelist();
+    
     return 0;
 }
 
 //free linked list 
 int freelist(){
-    node* temp=head;
+    node* temp=head->next;
+    head=NULL;
     while(temp!=NULL){
-        temp=temp->next;
-        free(temp->prev);
+          free(temp->prev);
+          temp->prev=NULL;
+          if(temp->next ==NULL){
+               free(temp);
+               return 0;
+          }
+          temp=temp->next;
     }
-    return 0;
+    return 1;
 }
 
 //insert new node to linked list 
@@ -66,7 +74,6 @@ node* createNewNode(int a){
     //checking memory avalability
     if(newNode == NULL ){
         printf("error occured creating new node");
-        return 1;
     }
     newNode->data=a;   //assign a to newNode data
     newNode->next=NULL; //set next to NULL 
