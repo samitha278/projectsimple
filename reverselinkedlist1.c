@@ -4,16 +4,16 @@
 
 typedef struct node{
     int data;
-    struct *node next;
+    struct node *next;
 }node;               //create node structure  
 
 node *head=NULL;     //head of linked list 
 
 node *createNewNode(int x){
-    node *newNode = (node *)molloc(sizeof(node));
+    node *newNode = (node *)malloc(sizeof(node));
     if(newNode==NULL){
         printf("error occured creating new node");
-        return 1;
+        return NULL;
     }
     newNode->data = x;
     newNode->next = NULL;
@@ -22,7 +22,7 @@ node *createNewNode(int x){
 }                           //create new node 
 
 int insertNewNode(int x){
-    node *newNode = createNewNode(int x);
+    node *newNode = createNewNode(x);
     if(head==NULL){
         head = newNode;
         return 0;
@@ -34,7 +34,7 @@ int insertNewNode(int x){
 
 node *getLastNode(){
     if(head==NULL)
-        return 1;
+        return NULL;
     node *last=head;
     while(last->next!=NULL){
         last=last->next;
@@ -47,14 +47,14 @@ int reverselist(){
         return 1;
     node *temp=getLastNode();
     
-    node *temp1=head;
     while(head->next!=NULL){
+        node *temp1=head;
         while(temp1->next->next!=NULL){
             temp1=temp1->next;
         }    
-    node *temp0=temp1->next;
-    temp0->next=temp1;
-    temp1->next=NULL;
+        node *temp0=temp1->next;
+        temp0->next=temp1;
+        temp1->next=NULL;
     }
     head=temp;
     return 0;
@@ -68,6 +68,7 @@ int print(){
         printf("%d", temp->data);
         temp=temp->next;
     }
+    printf("\n");
     return 0;
 }                           //print linked list
 
