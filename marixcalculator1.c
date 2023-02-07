@@ -1,15 +1,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//function declartion
 int *getmatrix(int row,int column);
 int userChoice();
 int addition(int *A,int *B);
 int smultiply(int scalar,int *A);
 int multiply(int *A,int *B);
 int subtract(int *A,int *B);
+//global variables
 int rA,cA;  //row_A , column_A
 int rB,cB;  //row_B , column_B
 
+//main function
 int main(void){
     printf("Operation menu\n");
     printf("    1.Add\n    2.Subtract\n");
@@ -19,6 +22,7 @@ int main(void){
     return 0;
 }
 
+//matrices addition function
 int addition(int *A,int *B){
     printf("\nThe Sum of matrix A + matrix B is :\n\n");
     int M[rA][cA];     //because rA==rB & cA==cB
@@ -33,6 +37,7 @@ int addition(int *A,int *B){
     return 0;
 }
 
+//matrices subtraction function
 int subtract(int *A,int *B){
     printf("\nThe difference between matrix A - matrix B is :\n\n");
     int M[rA][cA];     //because rA==rB & cA==cB
@@ -47,6 +52,7 @@ int subtract(int *A,int *B){
     return 0;
 }
 
+//matrices multiplication function
 int multiply(int *A,int *B){
     printf("\nMultiply of matrix A * matrix B is :\n\n");
     int M[rA][cB];
@@ -64,6 +70,7 @@ int multiply(int *A,int *B){
     return 0;
 }
 
+//scalar matrix multiplication function
 int smultiply(int scalar,int *A){
     printf("\nThe scalar multiplication between matrixA * 2 is:\n\n");
     int M[rA][cA];     //because rA==rB & cA==cB
@@ -130,7 +137,6 @@ int userChoice(){
         free(A);
     }
     
-    
     int repeat=0;
     printf("Do you want to repeat (if Yes-1/if No-0): ");
     scanf("%d", &repeat);
@@ -141,7 +147,8 @@ int userChoice(){
         return 0;
     }
 }
- 
+
+//create matrix (get inputs from user)
 int *getmatrix(int row,int column){
     
     if(row<0 || column<0){
