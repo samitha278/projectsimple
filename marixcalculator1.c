@@ -16,23 +16,34 @@ int main(void){
     printf("    3.Scalar Multiply\n    4.Multiply two matrices\n");
     
     userChoice();
+    return 0;
 }
 
 int addition(int *A,int *B){
+    printf("\nThe Sum of matrix A + matrix B is :\n\n");
     int M[rA][cA];     //because rA==rB & cA==cB
     for(int i=0;i<rA;i++){
         for(int j=0;j<cA;j++){
             M[i][j]=A[i*cA+j]+B[i*cB+j];
-            printf(" %d    ", M[i][j]);
+            printf("    %d    ", M[i][j]);
         }        
         printf("\n");
     }
-    
-    
-    
+    printf("\n");
+    return 0;
 }
 int subtract(int *A,int *B){
-    
+    printf("\nThe difference between matrix A - matrix B is :\n\n");
+    int M[rA][cA];     //because rA==rB & cA==cB
+    for(int i=0;i<rA;i++){
+        for(int j=0;j<cA;j++){
+            M[i][j]=A[i*cA+j]-B[i*cB+j];
+            printf("    %d    ", M[i][j]);
+        }        
+        printf("\n");
+    }
+    printf("\n");
+    return 0;
 }
 
 int multiply(int *A,int *B){
@@ -40,13 +51,23 @@ int multiply(int *A,int *B){
 }
 
 int smultiply(int scalar,int *A){
-    
+    printf("\nThe scalar multiplication between matrixA * 2 is:\n\n");
+    int M[rA][cA];     //because rA==rB & cA==cB
+    for(int i=0;i<rA;i++){
+        for(int j=0;j<cA;j++){
+            M[i][j]=scalar * A[i*cA+j];
+            printf("    %d    ", M[i][j]);
+        }        
+        printf("\n");
+    }
+    printf("\n");
+    return 0;
 }
 
 //get user chioce
 int userChoice(){
     int choice;
-    printf("Enter your choice: ");
+    printf("\nEnter your choice: ");
     scanf("%d", &choice);
     printf("\n");
     
@@ -82,16 +103,20 @@ int userChoice(){
         return 1;
     }
     
-    free(A);
-    free(B);
+    if(A!=NULL){
+        free(A);
+    }
+    if(B!=NULL){
+        free(B);
+    }
     
-    int repeat;
-    printf("Do you want to repeat (if Yes-1/if No-0): \n");
-    scanf("%c", &repeat);
-    if(repeat==1)
+    int repeat=0;
+    printf("Do you want to repeat (if Yes-1/if No-0): ");
+    scanf("%d", &repeat);
+    if(repeat==1){
         userChoice();
-    else{
-        printf("thank you");
+    }else{
+        printf("thanks you");
         return 0;
     }
 }
@@ -117,7 +142,7 @@ int *getmatrix(int row,int column){
             scanf("%d", &matrix[i*column+j]);
         }
     }
-    printf("\nmatrix\n");
+    printf("\n  input matrix \n");
     for(int i=0;i<row;i++){
         for(int j=0;j<column;j++){
         printf("    %d", matrix[i*column+j]);
