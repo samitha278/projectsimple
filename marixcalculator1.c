@@ -56,7 +56,7 @@ int multiply(int *A,int *B){
             for(int k=0;k<cA;k++){      //cA==rB
                 M[i][j]+=A[i*cA+k]*B[j+k*cB];
             }
-            printf("    %d    ", M[i][j]);
+            printf("    %d", M[i][j]);
         }
         printf("\n");
     }
@@ -113,6 +113,8 @@ int userChoice(){
             }
             multiply(A,B);
         }
+        if(B!=NULL)
+            free(B);
     }else if(choice==3){
         int scalar;
         printf("Enter scalar: ");
@@ -127,9 +129,7 @@ int userChoice(){
     if(A!=NULL){
         free(A);
     }
-    if(B!=NULL){
-        free(B);
-    }
+    
     
     int repeat=0;
     printf("Do you want to repeat (if Yes-1/if No-0): ");
