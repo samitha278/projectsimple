@@ -1,16 +1,22 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-int userInput();
+int *getA();
+int *getB();
+
 char userChoice();
 
 int main(void){
     printf("Operation menu\n");
-    printf("    1.Add\n    2.Subtract\n    3.Scalar Multiply\n    4.Multiply two matrices\n");
+    printf("    1.Add\n    2.Subtract\n");
+    printf("    3.Scalar Multiply\n    4.Multiply two matrices\n");
     
-    char repeat='Y';
-    while(repeat=='Y'){
-        repeat = userChoice();
-    }
+    
+    int *A=getA();
+    int *B=getB();
+    printf("%d", A[0][1]);
+    free(A);
+    free(B);
     printf("Thank you");
 }
 
@@ -23,8 +29,10 @@ char userChoice(){
     scanf("%d", &choice);
     printf("\n");
     
-    if(choice==1){
-        userInput();
+    if(choice==1 || choice==2){
+        int *A=getA();
+        int *B=getB();
+        
     }
     char repeat;
     printf("Do you want to repeat: (Y/N) \n");
@@ -32,9 +40,8 @@ char userChoice(){
     return repeat;
 
 }
-
-//get user input
-int userInput(){
+ 
+int *getA(){
     int row_A;
     int column_A;
     
@@ -42,15 +49,10 @@ int userInput(){
     scanf("%d %d", &row_A, &column_A);
     printf("%d %d \n",row_A,column_A);
     
-    int row_B;
-    int column_B;
-    
-    printf("Enter #rows and #columns of B: ");
-    scanf("%d %d", &row_B, &column_B);
-    printf("%d %d \n",row_B,column_B);
-    
-    int matrix_A[row_A][column_A];
-    int matrix_B[row_B][column_B];
+    int *matrix_A[row_A];
+    for(int i=0;i<row_A;i++){
+        matrix_A[i]=malloc(sizeof(int)*column_A);
+    }
     
     printf("Enter elements of %d x %d matrix A\n", row_A, column_A);
     for(int i=0;i<row_A;i++){
@@ -66,6 +68,21 @@ int userInput(){
         }
         printf("\n");
     }
+    return *matrix_A;
+}
+
+int *getB(){
+    int row_B;
+    int column_B;
+    
+    printf("Enter #rows and #columns of B: ");
+    scanf("%d %d", &row_B, &column_B);
+    printf("%d %d \n",row_B,column_B);
+    
+    int *matrix_B[row_B];
+    for(int i=0;i<row_B;i++){
+        matrix_B[i]=malloc(sizeof(int)*column_B);
+    }
     
     printf("Enter elements of %d x %d matrix B\n", row_B, column_B);
     for(int i=0;i<row_B;i++){
@@ -78,7 +95,8 @@ int userInput(){
     for(int i=0;i<row_B;i++){
         for(int j=0;j<column_B;j++){
         printf("    %d", matrix_B[i][j]);
-        }
+        };
         printf("\n");
     }
+    return *matrix_B;
 }
