@@ -2,26 +2,32 @@
 #include <stdlib.h>
 
 int *getmatrix(int row,int column);
-char userChoice();
+int userChoice();
 int addition(int *A,int *B);
 int smultiply(int scalar,int *A);
 int multiply(int *A,int *B);
 int subtract(int *A,int *B);
+int rA,cA;  //row_A , column_A
+int rB,cB;  //row_B , column_B
 
 int main(void){
     printf("Operation menu\n");
     printf("    1.Add\n    2.Subtract\n");
     printf("    3.Scalar Multiply\n    4.Multiply two matrices\n");
     
-    char ch;
-    do{
-        ch=userChoice();
-    }
-    while(ch=='Y');
-    
+    userChoice();
 }
 
 int addition(int *A,int *B){
+    int M[rA][cA];     //because rA==rB & cA==cB
+    for(int i=0;i<rA;i++){
+        for(int j=0;j<cA;j++){
+            M[i][j]=A[i*cA+j]+B[i*cB+j];
+            printf(" %d    ", M[i][j]);
+        }        
+        printf("\n");
+    }
+    
     
     
 }
@@ -38,22 +44,21 @@ int smultiply(int scalar,int *A){
 }
 
 //get user chioce
-char userChoice(){
+int userChoice(){
     int choice;
     printf("Enter your choice: ");
     scanf("%d", &choice);
     printf("\n");
-     
-    int rA,cA;
+    
+    int *A,*B; 
     printf("Enter number #rows and #columns of A: ");
     scanf("%d %d", &rA, &cA);
-    int *A=getmatrix(rA,cA);
+    A=getmatrix(rA,cA);
     
     if(choice==1 || choice==2 || choice==4){
-        int rB,cB;
         printf("Enter number #rows and #columns of B: ");
         scanf("%d %d", &rB, &cB);
-        int *B=getmatrix(rB,cB);
+        B=getmatrix(rB,cB);
         
         if(choice==1){
             addition(A,B);
@@ -77,11 +82,18 @@ char userChoice(){
         return 1;
     }
     
-    char repeat;
-    printf("Do you want to repeat (Y/N): \n");
+    free(A);
+    free(B);
+    
+    int repeat;
+    printf("Do you want to repeat (if Yes-1/if No-0): \n");
     scanf("%c", &repeat);
-    return repeat;
-
+    if(repeat==1)
+        userChoice();
+    else{
+        printf("thank you");
+        return 0;
+    }
 }
  
 int *getmatrix(int row,int column){
