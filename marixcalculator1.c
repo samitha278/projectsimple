@@ -1,102 +1,116 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *getA();
-int *getB();
-
+int *getmatrix(int row,int column);
 char userChoice();
+int addition(int *A,int *B);
+int smultiply(int scalar,int *A);
+int multiply(int *A,int *B);
+int subtract(int *A,int *B);
 
 int main(void){
     printf("Operation menu\n");
     printf("    1.Add\n    2.Subtract\n");
     printf("    3.Scalar Multiply\n    4.Multiply two matrices\n");
     
+    char ch;
+    do{
+        ch=userChoice();
+    }
+    while(ch=='Y');
     
-    int *A=getA();
-    int *B=getB();
-    printf("%d", A[0][1]);
-    free(A);
-    free(B);
-    printf("Thank you");
 }
 
-//marix addition
-int addition();
+int addition(int *A,int *B){
+    
+    
+}
+int subtract(int *A,int *B){
+    
+}
+
+int multiply(int *A,int *B){
+    
+}
+
+int smultiply(int scalar,int *A){
+    
+}
+
 //get user chioce
 char userChoice(){
     int choice;
     printf("Enter your choice: ");
     scanf("%d", &choice);
     printf("\n");
+     
+    int rA,cA;
+    printf("Enter number #rows and #columns of A: ");
+    scanf("%d %d", &rA, &cA);
+    int *A=getmatrix(rA,cA);
     
-    if(choice==1 || choice==2){
-        int *A=getA();
-        int *B=getB();
+    if(choice==1 || choice==2 || choice==4){
+        int rB,cB;
+        printf("Enter number #rows and #columns of B: ");
+        scanf("%d %d", &rB, &cB);
+        int *B=getmatrix(rB,cB);
         
+        if(choice==1){
+            addition(A,B);
+        }else if(choice==2){
+            subtract(A,B);
+        }else{
+            if(cA!=rB){
+                printf("error! Invalid input (must equal A columns & B rows)");
+                return 1;
+            }
+            multiply(A,B);
+        }
+    }else if(choice==3){
+        int scalar;
+        printf("Enter scalar: ");
+        scanf("%d", &scalar);
+        
+        smultiply(scalar,A);
+    }else{
+        printf("error! Invalid input");
+        return 1;
     }
+    
     char repeat;
-    printf("Do you want to repeat: (Y/N) \n");
+    printf("Do you want to repeat (Y/N): \n");
     scanf("%c", &repeat);
     return repeat;
 
 }
  
-int *getA(){
-    int row_A;
-    int column_A;
+int *getmatrix(int row,int column){
     
-    printf("Enter #rows and #columns of A: ");
-    scanf("%d %d", &row_A, &column_A);
-    printf("%d %d \n",row_A,column_A);
-    
-    int *matrix_A[row_A];
-    for(int i=0;i<row_A;i++){
-        matrix_A[i]=malloc(sizeof(int)*column_A);
+    if(row<0 || column<0){
+        printf("Error! enter valid inputs");
+        return NULL;
     }
     
-    printf("Enter elements of %d x %d matrix A\n", row_A, column_A);
-    for(int i=0;i<row_A;i++){
-        printf("%d entries of row %d: ",column_A, i+1);
-        for(int j=0;j<column_A;j++){
-            scanf("%d", &matrix_A[i][j]);
+    int elements=row*column;
+    int *matrix=(int *)malloc(sizeof(int)*elements);
+    if(matrix==NULL){
+        printf("Error occured creating matrix");
+        return NULL;
+    }
+    
+    printf("Enter elements of %d x %d matrix\n", row, column);
+    for(int i=0;i<row;i++){
+        printf("%d entries of row %d: ",column, i+1);
+        for(int j=0;j<column;j++){
+            scanf("%d", &matrix[i*column+j]);
         }
     }
-    printf("\nmatrix A\n");
-    for(int i=0;i<row_A;i++){
-        for(int j=0;j<column_A;j++){
-        printf("    %d", matrix_A[i][j]);
+    printf("\nmatrix\n");
+    for(int i=0;i<row;i++){
+        for(int j=0;j<column;j++){
+        printf("    %d", matrix[i*column+j]);
         }
         printf("\n");
     }
-    return *matrix_A;
-}
-
-int *getB(){
-    int row_B;
-    int column_B;
-    
-    printf("Enter #rows and #columns of B: ");
-    scanf("%d %d", &row_B, &column_B);
-    printf("%d %d \n",row_B,column_B);
-    
-    int *matrix_B[row_B];
-    for(int i=0;i<row_B;i++){
-        matrix_B[i]=malloc(sizeof(int)*column_B);
-    }
-    
-    printf("Enter elements of %d x %d matrix B\n", row_B, column_B);
-    for(int i=0;i<row_B;i++){
-        printf("%d entries of row %d: ",column_B, i+1);
-        for(int j=0;j<column_B;j++){
-            scanf("%d", &matrix_B[i][j]);
-        }
-    }
-    printf("\nmatrix B\n");
-    for(int i=0;i<row_B;i++){
-        for(int j=0;j<column_B;j++){
-        printf("    %d", matrix_B[i][j]);
-        };
-        printf("\n");
-    }
-    return *matrix_B;
+    return matrix;
 }
