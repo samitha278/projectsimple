@@ -47,7 +47,18 @@ int subtract(int *A,int *B){
 }
 
 int multiply(int *A,int *B){
-    
+    printf("\nMultiply of matrix A * matrix B is :\n\n");
+    int M[rA][cB];
+    for(int i=0;i<rA;i++){
+        for(int j=0;j<cB;j++){
+            M[i][j]=0;
+            for(int k=0;k<cA;k++){      //cA==rB
+                M[i][j]+=A[i*cA+k]*B[j+k*cB];
+            }
+            printf("%d", M[i][j]);
+        }
+        printf("\n");
+    }
 }
 
 int smultiply(int scalar,int *A){
