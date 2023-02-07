@@ -97,13 +97,18 @@ int userChoice(){
         scanf("%d %d", &rB, &cB);
         B=getmatrix(rB,cB);
         
-        if(choice==1){
-            addition(A,B);
-        }else if(choice==2){
-            subtract(A,B);
+        if(choice==1 || choice==2){
+            if(rA!=rB && cA!=cB){
+                printf("error! Invalid inputs (different dimention matrices)");
+                return 1;
+            }
+            if(choice==1)
+                addition(A,B);
+            else
+                subtract(A,B);
         }else{
             if(cA!=rB){
-                printf("error! Invalid input (must equal A columns & B rows)");
+                printf("error! Invalid input (must equal columns of A & rows of B)");
                 return 1;
             }
             multiply(A,B);
