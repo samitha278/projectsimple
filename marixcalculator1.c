@@ -32,6 +32,7 @@ int addition(int *A,int *B){
     printf("\n");
     return 0;
 }
+
 int subtract(int *A,int *B){
     printf("\nThe difference between matrix A - matrix B is :\n\n");
     int M[rA][cA];     //because rA==rB & cA==cB
@@ -55,10 +56,12 @@ int multiply(int *A,int *B){
             for(int k=0;k<cA;k++){      //cA==rB
                 M[i][j]+=A[i*cA+k]*B[j+k*cB];
             }
-            printf("%d", M[i][j]);
+            printf("    %d    ", M[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
+    return 0;
 }
 
 int smultiply(int scalar,int *A){
@@ -77,6 +80,7 @@ int smultiply(int scalar,int *A){
 
 //get user chioce
 int userChoice(){
+    
     int choice;
     printf("\nEnter your choice: ");
     scanf("%d", &choice);
@@ -88,6 +92,7 @@ int userChoice(){
     A=getmatrix(rA,cA);
     
     if(choice==1 || choice==2 || choice==4){
+        
         printf("Enter number #rows and #columns of B: ");
         scanf("%d %d", &rB, &cB);
         B=getmatrix(rB,cB);
@@ -153,6 +158,7 @@ int *getmatrix(int row,int column){
             scanf("%d", &matrix[i*column+j]);
         }
     }
+    
     printf("\n  input matrix \n");
     for(int i=0;i<row;i++){
         for(int j=0;j<column;j++){
@@ -160,5 +166,6 @@ int *getmatrix(int row,int column){
         }
         printf("\n");
     }
+    
     return matrix;
 }
