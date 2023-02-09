@@ -111,18 +111,18 @@ int choiceExecute(int choice){
     switch(choice){
         case 1:
         case 2:
-            getRowsColumns(rA,cA,'A');
-            getRowsColumns(rB,cB,'B');
+            getRowsColumns(&rA,&cA,'A');
+            getRowsColumns(&rB,&cB,'B');
             
             if(rA!=rB && cA!=cB){
-                printf("error! Invalid inputs (different dimention matrices)\n\n");
+                printf("error!!! Invalid inputs (different dimention matrices)\n\n");
                 choiceExecute(1);
             }else if(rA!=rB){
-                printf("rows are not equal\n\n");
+                printf("error!! Rows are not equal\n\n");
                 choiceExecute(1);
             }
             else if(cA!=cB){
-                printf("columns are not equal\n\n");
+                printf("error!! Columns are not equal\n\n");
                 choiceExecute(1);
             }else{
                 A=getmatrix(rA,cA,'A');
@@ -146,7 +146,7 @@ int choiceExecute(int choice){
             printf("Enter scalar: ");
             scanf("%d", &scalar);
         
-            getRowsColumns(rA,cA,'A');
+            getRowsColumns(&rA,&cA,'A');
             A=getmatrix(rA,cA,'A');
             
             smultiply(scalar,A);
@@ -157,8 +157,8 @@ int choiceExecute(int choice){
             break;
             
         case 4:
-            getRowsColumns(rA,cA,'A');
-            getRowsColumns(rB,cB,'B');
+            getRowsColumns(&rA,&cA,'A');
+            getRowsColumns(&rB,&cB,'B');
             
             if(cA!=rB){
                 printf("error! Invalid input (must equal columns of A & rows of B)\n\n");
@@ -193,23 +193,22 @@ int choiceExecute(int choice){
 
 //get user input for marix rows and columns
 int getRowsColumns(int *row,int *column,char ch){
-    printf("Enter number #rows and #columns of %c: ", ch);
-    scanf("%d %d", row, column);
-    return 0;
+    while(1){
+        printf("Enter number #rows and #columns of %c: ", ch);
+        scanf("%d %d", row, column);
+        if(*row>0 && *column>0)
+            return 0;
+        printf("Error! enter valid inputs\n\n");
+    }
 }
 
 //create matrix (get inputs from user)
 int *getmatrix(int row,int column,char ch){
     
-    if(row<0 || column<0){
-        printf("Error! enter valid inputs");
-        return NULL;
-    }
-    
     int elements=row*column;
     int *matrix=(int *)malloc(sizeof(int)*elements);
     if(matrix==NULL){
-        printf("Error occured creating matrix");
+        printf("Error occured (in system) while creating matrix");
         return NULL;
     }
     
