@@ -4,7 +4,7 @@
 //function declartion
 int userChoice();
 int choiceExecute(int choice);
-int *getmatrix(int row,int column);
+int *getmatrix(int row,int column,char ch);
 int addition(int *A,int *B);
 int subtract(int *A,int *B);
 int multiply(int *A,int *B);
@@ -104,13 +104,11 @@ int choiceExecute(int choice){
     int *A,*B; 
     printf("Enter number #rows and #columns of A: ");
     scanf("%d %d", &rA, &cA);
-    A=getmatrix(rA,cA);
     
     if(choice==1 || choice==2 || choice==4){
         
         printf("Enter number #rows and #columns of B: ");
         scanf("%d %d", &rB, &cB);
-        B=getmatrix(rB,cB);
         
         if(choice==1 || choice==2){
             if(rA!=rB && cA!=cB){
@@ -124,6 +122,8 @@ int choiceExecute(int choice){
                 printf("columns are not equal\n\n");
                 choiceExecute(1);
             }else{
+                A=getmatrix(rA,cA,'A');
+                B=getmatrix(rB,cB,'B');
                 if(choice==1)
                     addition(A,B);
                 else
@@ -134,12 +134,16 @@ int choiceExecute(int choice){
                 printf("error! Invalid input (must equal columns of A & rows of B)\n\n");
                 choiceExecute(4);
             }
-            else
+            else{
+                A=getmatrix(rA,cA,'A');
+                B=getmatrix(rB,cB,'B');
                 multiply(A,B);
+            }
         }
         if(B!=NULL)
             free(B);
     }else if(choice==3){
+        A=getmatrix(rA,cA,'A');
         int scalar;
         printf("Enter scalar: ");
         scanf("%d", &scalar);
@@ -166,7 +170,7 @@ int choiceExecute(int choice){
 }
 
 //create matrix (get inputs from user)
-int *getmatrix(int row,int column){
+int *getmatrix(int row,int column,char ch){
     
     if(row<0 || column<0){
         printf("Error! enter valid inputs");
@@ -180,7 +184,7 @@ int *getmatrix(int row,int column){
         return NULL;
     }
     
-    printf("Enter elements of %d x %d matrix\n", row, column);
+    printf("Enter elements of %d x %d matrix %c\n", row, column,ch);
     for(int i=0;i<row;i++){
         printf("%d entries of row %d: ",column, i+1);
         for(int j=0;j<column;j++){
@@ -188,7 +192,7 @@ int *getmatrix(int row,int column){
         }
     }
     
-    printf("\n  input matrix \n");
+    printf("\n  input matrix %c\n",ch);
     for(int i=0;i<row;i++){
         for(int j=0;j<column;j++){
         printf("    %d", matrix[i*column+j]);
