@@ -2,12 +2,14 @@
 #include <stdlib.h>
 
 //function declartion
-int *getmatrix(int row,int column);
 int userChoice();
+int choiceExecute(int choice);
+int *getmatrix(int row,int column);
 int addition(int *A,int *B);
-int smultiply(int scalar,int *A);
-int multiply(int *A,int *B);
 int subtract(int *A,int *B);
+int multiply(int *A,int *B);
+int smultiply(int scalar,int *A);
+
 //global variables
 int rA,cA;  //row_A , column_A
 int rB,cB;  //row_B , column_B
@@ -55,7 +57,7 @@ int subtract(int *A,int *B){
 //matrices multiplication function
 int multiply(int *A,int *B){
     printf("\nMultiply of matrix A * matrix B is :\n\n");
-    int M[rA][cB];
+    int M[rA][cB];                 
     for(int i=0;i<rA;i++){
         for(int j=0;j<cB;j++){
             M[i][j]=0;
@@ -73,7 +75,7 @@ int multiply(int *A,int *B){
 //scalar matrix multiplication function
 int smultiply(int scalar,int *A){
     printf("\nThe scalar multiplication between matrixA * 2 is:\n\n");
-    int M[rA][cA];     //because rA==rB & cA==cB
+    int M[rA][cA];    
     for(int i=0;i<rA;i++){
         for(int j=0;j<cA;j++){
             M[i][j]=scalar * A[i*cA+j];
@@ -93,6 +95,12 @@ int userChoice(){
     scanf("%d", &choice);
     printf("\n");
     
+    choiceExecute(choice);
+    return 0;
+}
+
+int choiceExecute(int choice){
+    
     int *A,*B; 
     printf("Enter number #rows and #columns of A: ");
     scanf("%d %d", &rA, &cA);
@@ -107,18 +115,27 @@ int userChoice(){
         if(choice==1 || choice==2){
             if(rA!=rB && cA!=cB){
                 printf("error! Invalid inputs (different dimention matrices)");
-                return 1;
+                choiceExecute(1);
+            }else if(rA!=rB){
+                printf("rows are not equal");
+                choiceExecute(1);
             }
-            if(choice==1)
-                addition(A,B);
-            else
-                subtract(A,B);
+            else if(cA!=cB){
+                printf("columns are not equal");
+                choiceExecute(1);
+            }else{
+                if(choice==1)
+                    addition(A,B);
+                else
+                    subtract(A,B);
+            }
         }else{
             if(cA!=rB){
                 printf("error! Invalid input (must equal columns of A & rows of B)");
-                return 1;
+                choiceExecute(4);
             }
-            multiply(A,B);
+            else
+                multiply(A,B);
         }
         if(B!=NULL)
             free(B);
