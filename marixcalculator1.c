@@ -114,14 +114,14 @@ int choiceExecute(int choice){
         
         if(choice==1 || choice==2){
             if(rA!=rB && cA!=cB){
-                printf("error! Invalid inputs (different dimention matrices)");
+                printf("error! Invalid inputs (different dimention matrices)\n\n");
                 choiceExecute(1);
             }else if(rA!=rB){
-                printf("rows are not equal");
+                printf("rows are not equal\n\n");
                 choiceExecute(1);
             }
             else if(cA!=cB){
-                printf("columns are not equal");
+                printf("columns are not equal\n\n");
                 choiceExecute(1);
             }else{
                 if(choice==1)
@@ -131,7 +131,7 @@ int choiceExecute(int choice){
             }
         }else{
             if(cA!=rB){
-                printf("error! Invalid input (must equal columns of A & rows of B)");
+                printf("error! Invalid input (must equal columns of A & rows of B)\n\n");
                 choiceExecute(4);
             }
             else
@@ -146,8 +146,8 @@ int choiceExecute(int choice){
         
         smultiply(scalar,A);
     }else{
-        printf("error! Invalid input");
-        return 1;
+        printf("error! Invalid input\n\n");
+        userChoice();
     }
     
     if(A!=NULL){
