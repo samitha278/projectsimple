@@ -17,8 +17,8 @@ int rB,cB;  //row_B , column_B
 //main function
 int main(void){
     printf("Operation menu\n");
-    printf("    1.Add\n    2.Subtract\n");
-    printf("    3.Scalar Multiply\n    4.Multiply two matrices\n");
+    printf("\t1.Add\n\t2.Subtract\n");
+    printf("\t3.Scalar Multiply\n\t4.Multiply two matrices\n");
     
     userChoice();
     return 0;
@@ -31,7 +31,7 @@ int addition(int *A,int *B){
     for(int i=0;i<rA;i++){
         for(int j=0;j<cA;j++){
             M[i][j]=A[i*cA+j]+B[i*cB+j];
-            printf("    %d    ", M[i][j]);
+            printf("\t%d", M[i][j]);
         }        
         printf("\n");
     }
@@ -46,7 +46,7 @@ int subtract(int *A,int *B){
     for(int i=0;i<rA;i++){
         for(int j=0;j<cA;j++){
             M[i][j]=A[i*cA+j]-B[i*cB+j];
-            printf("    %d    ", M[i][j]);
+            printf("\t%d", M[i][j]);
         }        
         printf("\n");
     }
@@ -64,7 +64,7 @@ int multiply(int *A,int *B){
             for(int k=0;k<cA;k++){      //cA==rB
                 M[i][j]+=A[i*cA+k]*B[j+k*cB];
             }
-            printf("    %d", M[i][j]);
+            printf("\t%d", M[i][j]);
         }
         printf("\n");
     }
@@ -79,7 +79,7 @@ int smultiply(int scalar,int *A){
     for(int i=0;i<rA;i++){
         for(int j=0;j<cA;j++){
             M[i][j]=scalar * A[i*cA+j];
-            printf("    %d    ", M[i][j]);
+            printf("\t%d", M[i][j]);
         }        
         printf("\n");
     }
@@ -192,13 +192,14 @@ int *getmatrix(int row,int column,char ch){
         }
     }
     
-    printf("\n  input matrix %c\n",ch);
+    printf("\n\tMatrix %c\n\n",ch);
     for(int i=0;i<row;i++){
         for(int j=0;j<column;j++){
-        printf("    %d", matrix[i*column+j]);
+        printf("\t%d", matrix[i*column+j]);
         }
         printf("\n");
     }
+    printf("\n");
     
     return matrix;
 }
