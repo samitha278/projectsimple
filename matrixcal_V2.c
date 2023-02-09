@@ -115,14 +115,14 @@ int choiceExecute(int choice){
             getRowsColumns(&rB,&cB,'B');
             
             if(rA!=rB && cA!=cB){
-                printf("error!!! Invalid inputs (different dimention matrices)\n\n");
+                printf("Erorr!!! Invalid inputs (different dimention matrices)\n\n");
                 choiceExecute(1);
             }else if(rA!=rB){
-                printf("error!! Rows are not equal\n\n");
+                printf("Erorr!! Rows are not equal\n\n");
                 choiceExecute(1);
             }
             else if(cA!=cB){
-                printf("error!! Columns are not equal\n\n");
+                printf("Erorr!! Columns are not equal\n\n");
                 choiceExecute(1);
             }else{
                 A=getmatrix(rA,cA,'A');
@@ -138,7 +138,6 @@ int choiceExecute(int choice){
             if(B!=NULL)
                 free(B);
                 
-            userChoice();
             break;
             
         case 3:
@@ -153,7 +152,7 @@ int choiceExecute(int choice){
             
             if(A!=NULL)
                 free(A);
-            userChoice();
+            
             break;
             
         case 4:
@@ -161,7 +160,7 @@ int choiceExecute(int choice){
             getRowsColumns(&rB,&cB,'B');
             
             if(cA!=rB){
-                printf("error! Invalid input (must equal columns of A & rows of B)\n\n");
+                printf("Erorr! Invalid input (must equal columns of A & rows of B)\n\n");
                 choiceExecute(4);
             }
             else{
@@ -175,7 +174,6 @@ int choiceExecute(int choice){
             if(B!=NULL)
                 free(B);
                 
-            userChoice();
             break;
     }
     
@@ -198,7 +196,7 @@ int getRowsColumns(int *row,int *column,char ch){
         scanf("%d %d", row, column);
         if(*row>0 && *column>0)
             return 0;
-        printf("Error! enter valid inputs(must rows & columns > 0)\n");
+        printf("Erorr! enter valid inputs(must rows & columns > 0)\n");
     }
 }
 
@@ -208,11 +206,11 @@ int *getmatrix(int row,int column,char ch){
     int elements=row*column;
     int *matrix=(int *)malloc(sizeof(int)*elements);
     if(matrix==NULL){
-        printf("Error occured (in system) while creating matrix");
+        printf("Erorr occured (in system) while creating matrix");
         return NULL;
     }
     
-    printf("Enter elements of %d x %d matrix %c\n", row, column,ch);
+    printf("\nEnter elements of matrix %c (%d x %d) :\n", ch,row, column);
     for(int i=0;i<row;i++){
         printf("%d entries of row %d: ",column, i+1);
         for(int j=0;j<column;j++){
