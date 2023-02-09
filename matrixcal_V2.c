@@ -116,14 +116,14 @@ int choiceExecute(int choice){
             
             if(rA!=rB && cA!=cB){
                 printf("Erorr!!! Invalid inputs (different dimention matrices)\n\n");
-                choiceExecute(1);
+                choiceExecute(choice);
             }else if(rA!=rB){
                 printf("Erorr!! Rows are not equal\n\n");
-                choiceExecute(1);
+                choiceExecute(choice);
             }
             else if(cA!=cB){
                 printf("Erorr!! Columns are not equal\n\n");
-                choiceExecute(1);
+                choiceExecute(choice);
             }else{
                 A=getmatrix(rA,cA,'A');
                 B=getmatrix(rB,cB,'B');
@@ -142,7 +142,7 @@ int choiceExecute(int choice){
             
         case 3:
             int scalar;
-            printf("Enter scalar: ");
+            printf("\nEnter scalar: ");
             scanf("%d", &scalar);
         
             getRowsColumns(&rA,&cA,'A');
