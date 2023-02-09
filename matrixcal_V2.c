@@ -95,12 +95,12 @@ int userChoice(){
     while(1){
         printf("\nEnter your choice: ");
         scanf("%d", &choice);
-        printf("\n");
         
-        if(choice>0 && choice<5)
+        if(choice>0 && choice<5){
             choiceExecute(choice);
             return 0;
-        printf("Invalid input");
+        }
+        printf("Invalid input\n");
     }
 }
 
@@ -194,11 +194,11 @@ int choiceExecute(int choice){
 //get user input for marix rows and columns
 int getRowsColumns(int *row,int *column,char ch){
     while(1){
-        printf("Enter number #rows and #columns of %c: ", ch);
+        printf("\nEnter number #rows and #columns of %c: ", ch);
         scanf("%d %d", row, column);
         if(*row>0 && *column>0)
             return 0;
-        printf("Error! enter valid inputs\n\n");
+        printf("Error! enter valid inputs(must rows & columns > 0)\n");
     }
 }
 
